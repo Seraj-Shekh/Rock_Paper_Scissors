@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rock Paper Scissors</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
+    .hand {
+        width: 150px;
+        height: 150px;
+    }
+    .btn {
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 5px;
+    }
+    .result {
+        font-size: 1.2rem;
+    }
+    .hand-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Rock Paper Scissors</h1>
+    <div class="hand-container">
+        <img src="/img/rockuser.png" alt="Rock" class="hand" id="userHand">
+        <img src="/img/rock.png" alt="Rock" class="hand" id="computerHand">
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <button class="btn btn-success" onclick="play('rock')">Rock</button>
+            <button class="btn btn-success" onclick="play('paper')">Paper</button>
+            <button class="btn btn-success" onclick="play('scissors')">Scissors</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-sm-12">
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function play(userChoice) {
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+        let userHandImg = document.getElementById('userHand');
+        let computerHandImg = document.getElementById('computerHand');
+
+        userHandImg.src = `/img/${userChoice}user.png`;
+        computerHandImg.src = `/img/${computerChoice}.png`;
+
+        let result;
+        if (userChoice === computerChoice) {
+            result = "It's a tie!";
+        } else if (
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'paper' && computerChoice === 'rock') ||
+            (userChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            result = "You win!";
+        } else {
+            result = "Computer wins!";
+        }
+
+        document.getElementById("result").textContent = `You chose ${userChoice}, computer chose ${computerChoice}. ${result}`;
+    }
+</script>
+
+</body>
+</html>
